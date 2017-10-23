@@ -1,7 +1,7 @@
 #include <WiFi.h>
 uint8_t MacData[6];
-char ssid[] = "D-School506_2.4GHz";      // your network SSID (name)
-char pass[] = "ntudschool";     // your network password
+char ssid[] = "NCNU-EMBA";      // your network SSID (name)
+char pass[] = "0492918270";     // your network password
 
 
 IPAddress  Meip ,Megateway ,Mesubnet ;
@@ -102,7 +102,7 @@ void printWifiData()
   Serial.println(Mesubnet);
 
   // print your gateway address:
-  Megateway = WiFi.gatewayIP();
+  Megateway = WiFi.gatewayIP();   //
   Serial.print("Gateway: ");
   Serial.println(Megateway);
 }
@@ -131,8 +131,8 @@ void initializeWiFi() {
     Serial.print("Attempting to connect to SSID: ");
     Serial.println(ssid);
     // Connect to WPA/WPA2 network. Change this line if using open or WEP network:
-    status = WiFi.begin(ssid, pass);
-  //   status = WiFi.begin(ssid);
+   // status = WiFi.begin(ssid, pass);
+     status = WiFi.begin(ssid);
 
     // wait 10 seconds for connection:
     delay(10000);

@@ -6,12 +6,18 @@ int keyIndex = 0;                 // your network key Index number (needed only 
 int status = WL_IDLE_STATUS;
 WiFiServer server(80);
 #define RelayPin 13
+#define RelayPin2 12
+#define RelayPin3 11
+#define RelayPin4 10
 #define Turnon HIGH
 #define Turnoff LOW
 
 void setup() {
   Serial.begin(9600);      // initialize serial communication
   pinMode(RelayPin, OUTPUT);      // set the LED pin mode
+  pinMode(RelayPin2, OUTPUT);      // set the LED pin mode
+  pinMode(RelayPin3, OUTPUT);      // set the LED pin mode
+  pinMode(RelayPin4, OUTPUT);      // set the LED pin mode
   // check for the presence of the shield:
   if (WiFi.status() == WL_NO_SHIELD) {
     Serial.println("WiFi shield not present");
@@ -62,8 +68,16 @@ void loop() {
             client.println();
 
             // the content of the HTTP response follows the header:
-            client.print("Click <a href=\"/H\">here</a> turn Power on<br>");
-            client.print("Click <a href=\"/L\">here</a> turn Power off<br>");
+ //           client.print("Click <a href=\"/H\">here</a> turn Power on<br>");
+  //          client.print("Click <a href=\"/L\">here</a> turn Power off<br>");
+            client.print("led 2 Click <a href=\"/1H\">here</a> turn Power on<br>");
+            client.print("led 2 Click <a href=\"/1L\">here</a> turn Power off<br>");
+            client.print("led 3 Click <a href=\"/2H\">here</a> turn Power on<br>");
+            client.print("led 3 Click <a href=\"/2L\">here</a> turn Power off<br>");
+            client.print("led 4 Click <a href=\"/3H\">here</a> turn Power on<br>");
+            client.print("led 4 Click <a href=\"/3L\">here</a> turn Power off<br>");
+            client.print("led 5 Click <a href=\"/4H\">here</a> turn Power on<br>");
+            client.print("led 5 Click <a href=\"/4L\">here</a> turn Power off<br>");
 
             // The HTTP response ends with another blank line:
             client.println();
@@ -77,11 +91,29 @@ void loop() {
         }
 
         // Check to see if the client request was "GET /H" or "GET /L":
-        if (currentLine.endsWith("GET /H")) {
+        if (currentLine.endsWith("GET /1H")) {
           digitalWrite(RelayPin, Turnon);               // GET /H turns the LED on
         }
-        if (currentLine.endsWith("GET /L")) {
+        if (currentLine.endsWith("GET /1L")) {
           digitalWrite(RelayPin, Turnoff);                // GET /L turns the LED off
+        }
+        if (currentLine.endsWith("GET /2H")) {
+          digitalWrite(RelayPin2, Turnon);               // GET /H turns the LED on
+        }
+        if (currentLine.endsWith("GET /2L")) {
+          digitalWrite(RelayPin2, Turnoff);                // GET /L turns the LED off
+        }
+        if (currentLine.endsWith("GET /3H")) {
+          digitalWrite(RelayPin3, Turnon);               // GET /H turns the LED on
+        }
+        if (currentLine.endsWith("GET /3L")) {
+          digitalWrite(RelayPin3, Turnoff);                // GET /L turns the LED off
+        }
+        if (currentLine.endsWith("GET /4H")) {
+          digitalWrite(RelayPin4, Turnon);               // GET /H turns the LED on
+        }
+        if (currentLine.endsWith("GET /4L")) {
+          digitalWrite(RelayPin4, Turnoff);                // GET /L turns the LED off
         }
       }
     }
